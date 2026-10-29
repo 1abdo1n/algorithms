@@ -1,5 +1,4 @@
 class MaxHeap:
-    """Max-heap of (priority, name) tasks, stored in a list."""
 
     def __init__(self):
         self.heap = []
