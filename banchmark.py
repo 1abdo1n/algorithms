@@ -4,7 +4,6 @@ import time
 import matplotlib.pyplot as plt
 
 
-# ---------------- Algorithms ----------------
 def insertion_sort(arr):
     a = arr[:]
     for i in range(1, len(a)):
@@ -21,7 +20,7 @@ def merge_sort(arr):
     n = len(arr)
     src, dst = arr[:], [0] * n
     width = 1
-    while width < n:  # bottom-up: no recursion
+    while width < n: 
         for lo in range(0, n, 2 * width):
             mid = min(lo + width, n)
             hi = min(lo + 2 * width, n)
@@ -48,7 +47,6 @@ def merge_sort(arr):
 
 
 def quick_sort(arr):
-    # random pivot + 3-way split: avoids O(n^2) on sorted/reversed data
     if len(arr) <= 1:
         return arr
     pivot = arr[random.randrange(len(arr))]
@@ -69,10 +67,9 @@ ALGORITHMS = {
     "sorted()": python_sorted,
 }
 
-# ---------------- Config ----------------
 SIZES = [10**3, 10**4, 10**5]
 KINDS = ["sorted", "reversed", "random"]
-INSERTION_MAX_N = 10**4  # insertion sort is O(n^2): skip 10^5
+INSERTION_MAX_N = 10**4
 
 
 def make_data(kind, n):
@@ -94,7 +91,6 @@ def measure(func, data, repeats):
     return best
 
 
-# ---------------- Run ----------------
 def main():
     random.seed(42)
     results = {k: {name: [] for name in ALGORITHMS} for k in KINDS}
@@ -111,7 +107,6 @@ def main():
                 results[kind][name].append(t)
                 print(f"{kind:9} n={n:<7} {name:10} {t:.6f}s")
 
-    # ---------------- Plot ----------------
     fig, axes = plt.subplots(1, 3, figsize=(16, 5), sharey=True)
     for ax, kind in zip(axes, KINDS):
         for name in ALGORITHMS:
